@@ -8,7 +8,7 @@ steps:
       - -c
       - |
         pip install kfp && \
-        compile-kfp-pipeline
+        make compile-kfp-pipeline
     env:
       - PIPELINE_TEMPLATE=${_PIPELINE_TEMPLATE}
 
