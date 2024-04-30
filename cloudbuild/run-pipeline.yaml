@@ -2,12 +2,12 @@
 steps:
 
   # Install pipenv, install deps, compile pipelines
-  - name: gcr.io/tfx-oss-public/tfx:1.0.0
+  - name: gcr.io/tfx-oss-public/tfx:1.4.0
     entrypoint: /bin/sh
     args:
       - -c
       - |
-        pip install kfp && \
+        pip install google-cloud-aiplatform==1.7.1 kfp==1.8.1 && \
         make compile-kfp-pipeline
     env:
       - PIPELINE_TEMPLATE=${_PIPELINE_TEMPLATE}
