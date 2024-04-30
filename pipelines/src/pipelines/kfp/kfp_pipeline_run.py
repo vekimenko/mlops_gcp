@@ -238,7 +238,7 @@ def _compile(package_path, config):
         train_query=config["TRAIN_QUERY"],
         test_query=config["TEST_QUERY"],
         project=config["PROJECT"],
-        threshold_dict_str='{"roc":0.8}',
+        threshold_dict_str='{"roc":0.1}',
         dest_path=config["DEST_PATH"]
     )
     compiler.Compiler().compile(
