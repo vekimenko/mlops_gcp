@@ -172,3 +172,4 @@ env.sh
 
 # Compiled pipelines
 **/*pipeline.json
+notes.txt
