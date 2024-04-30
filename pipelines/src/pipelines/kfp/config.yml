@@ -3,7 +3,7 @@ REGION: "europe-west2"
 SERVICE_ACCOUNT: "792237211962-compute@developer.gserviceaccount.com"
 BUCKET: "mlops-gcp"
 VERSION: "v01"
-DATASET_DISPLAY_NAME: "UserAgentSciKit"
+DATASET_DISPLAY_NAME: "useragentscikit"
 RAW_SCHEMA_DIR: "titanic/raw_schema"
 MLMD_SQLLITE: "mlmd.sqllite"
 REMOVE_ARTIFACTS: True
