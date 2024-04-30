@@ -10,9 +10,9 @@ steps:
     entrypoint: pip
     args: ["install","-r", "requirements.txt", "--user"]
   # Compile pipeline
-  - name: 'python:3.7'
-    entrypoint: 'python'
-    args: ['-m', 'pipelines.kfp.kfp_pipeline_run']
+  - name: python:3.7
+    entrypoint: python
+    args: ["-m", "pipelines.src.pipelines.kfp.kfp_pipeline_run"]
     id: 'compile'
   # Upload compiled pipeline to GCS.
   - name: 'gcr.io/cloud-builders/gsutil'
