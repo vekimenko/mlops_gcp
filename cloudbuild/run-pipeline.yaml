@@ -7,7 +7,7 @@ steps:
     args:
       - -c
       - |
-        pip install kfp && \
+        pip install kfp jinja2 && \
         make compile-kfp-pipeline
     env:
       - PIPELINE_TEMPLATE=${_PIPELINE_TEMPLATE}
