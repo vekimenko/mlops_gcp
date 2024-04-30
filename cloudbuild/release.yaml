@@ -21,11 +21,7 @@ steps:
       - -c
       - |
         make setup && \
-        echo 'setupdone' && \
-        make compile-pipeline pipeline=training && \
-        echo 'compile-training' && \
-        make compile-pipeline pipeline=prediction
-        echo 'compile-prediction' && \
+        make compile-pipeline pipeline=training
     env:
       - PIPELINE_TEMPLATE=${_PIPELINE_TEMPLATE}
 

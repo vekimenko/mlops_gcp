@@ -33,8 +33,9 @@ test-trigger: ## Runs unit tests for the pipeline trigger code
 
 compile-pipeline: ## Compile the pipeline to training.json or prediction.json. Must specify pipeline=<training|prediction>
 	@cd pipelines/src && \
-	echo pipelines.${PIPELINE_TEMPLATE}.${pipeline}.pipeline && \
-	pipenv run python -m pipelines.${PIPELINE_TEMPLATE}.${pipeline}.pipeline
+	## echo pipelines.${PIPELINE_TEMPLATE}.${pipeline}.pipeline && \
+	## pipenv run python -m pipelines.${PIPELINE_TEMPLATE}.${pipeline}.pipeline
+	pipenv run python -m pipelines.xgboost.training.pipeline
 
 setup-components: ## Run unit tests for a component group
 	@cd "components/${GROUP}" && \
