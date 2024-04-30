@@ -7,7 +7,7 @@ import sys
 
 # sys.path.append("../..")
 # from src.common import utils
-import utils
+from . import utils
 from google.cloud import aiplatform as aip
 
 
