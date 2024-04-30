@@ -2,12 +2,12 @@
 steps:
 
   # Install pipenv, install deps, compile pipelines
-  - name: python:3.9
+  - name: gcr.io/tfx-oss-public/tfx:1.0.0
     entrypoint: /bin/sh
     args:
       - -c
       - |
-        pip install kfp jinja2 && \
+        pip install kfp && \
         make compile-kfp-pipeline
     env:
       - PIPELINE_TEMPLATE=${_PIPELINE_TEMPLATE}
