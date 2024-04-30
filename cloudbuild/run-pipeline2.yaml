@@ -1,0 +1,23 @@
+steps:
+  # Install dependencies
+  - name: python:3.7
+    entrypoint: pip
+    args: ["install","--upgrade", "pip", "--user"]
+  - name: python:3.7
+    entrypoint: pip
+    args: ["install","--upgrade", "tfx[kfp]<2", "--user"]
+  - name: python:3.7
+    entrypoint: pip
+    args: ["install","-r", "requirements.txt", "--user"]
+  # Compile pipeline
+  - name: 'python:3.7'
+    entrypoint: 'python'
+    args: ['-m', 'pipelines.kfp.kfp_pipeline_run']
+    id: 'compile'
+  # Upload compiled pipeline to GCS.
+  - name: 'gcr.io/cloud-builders/gsutil'
+    args: ['cp', 'pipeline.json', 'gs://mlops-gcp/pipelines_json']
+    id:  'upload'
+    waitFor: ['compile']
+options:
+  logging: CLOUD_LOGGING_ONLY
