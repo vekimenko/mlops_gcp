@@ -5,7 +5,8 @@ import os
 
 
 def load_config():
-    with open("config.yml", "r") as f:
+    _dir = os.path.abspath(os.path.dirname(__file__))
+    with open(f"{_dir}/config.yml", "r") as f:
         config = yaml.load(f, Loader=yaml.FullLoader)
     # PROJECT = config["PROJECT"]
     # REGION = config["REGION"]
