@@ -35,6 +35,10 @@ compile-pipeline: ## Compile the pipeline to training.json or prediction.json. M
 	@cd pipelines/src && \
 	pipenv run python -m pipelines.xgboost.training.pipeline
 
+compile-kfp-pipeline: ## Compile the pipeline to training.json or prediction.json. Must specify pipeline=<training|prediction>
+	@cd pipelines/src && \
+	python -m pipelines.kfp.kfp_pipeline_run
+
 setup-components: ## Run unit tests for a component group
 	@cd "components/${GROUP}" && \
 	pipenv install --dev
