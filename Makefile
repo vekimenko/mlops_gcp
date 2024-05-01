@@ -41,7 +41,8 @@ compile-kfp-pipeline: ## Compile the pipeline to training.json or prediction.jso
 
 test-log: ## Compile the pipeline to training.json or prediction.json. Must specify pipeline=<training|prediction>
 	@cd pipelines/src && \
-	pipenv run python -c "print('hello')"
+	## pipenv run python -c "print('hello')"
+	pipenv run python -m pipelines.kfp.kfp_pipeline_run
 
 setup-components: ## Run unit tests for a component group
 	@cd "components/${GROUP}" && \

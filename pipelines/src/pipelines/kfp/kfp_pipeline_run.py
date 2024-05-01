@@ -9,6 +9,7 @@ import sys
 # from src.common import utils
 from . import utils
 from google.cloud import aiplatform as aip
+import logging
 
 
 @component(
@@ -248,7 +249,11 @@ def _compile(package_path, config):
 
 
 def main():
+    print("start")
     config = utils.load_config()
+    print("config")
+    logging.info("config from logging")
+    logging.info(str(config))
     _compile("pipeline.json", config)
     aip.init(project=config["PROJECT"], staging_bucket="gs://mlops-gcp/tmp", location=config["REGION"])
     job = aip.PipelineJob(
