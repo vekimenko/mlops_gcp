@@ -31,7 +31,7 @@ def data_download(
         df['user_agent'] = df['user_agent'].astype('string')
         df = df[df['status'] != 'TBD']
         df['target'] = 0
-        df['target'] = df['target'].mask(df['status'] == 'bad', 1)
+        df['target'] = df['target'].mask(df['status'] == 1, 1)
         df = df.drop(columns='status')
         df_class_0 = df[df['target'] == 0]
         df_class_1 = df[df['target'] == 1]
