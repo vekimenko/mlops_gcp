@@ -1,0 +1,19 @@
+---
+steps:
+
+  # Install pipenv, install deps, compile pipelines
+  - name: python:3.7
+    entrypoint: /bin/sh
+    args:
+      - -c
+      - |
+        make setup && \
+        make test-log
+    env:
+      - PIPELINE_TEMPLATE=${_PIPELINE_TEMPLATE}
+
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+timeout: 1800s  # 30mins
