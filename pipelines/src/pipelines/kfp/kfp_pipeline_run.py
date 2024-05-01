@@ -74,6 +74,7 @@ def model_train(
     x_train = data[['user_agent']].values.tolist()
     y_train = data["target"].values.tolist()
     
+    
     vect = TfidfVectorizer(lowercase=False, ngram_range=(1, 3))
     
     preprocess = ColumnTransformer(
