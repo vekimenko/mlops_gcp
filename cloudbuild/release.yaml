@@ -27,7 +27,7 @@ steps:
 
   # Copy pipelines and files to a new directory in GCS
   # (via a new local directory)
-  # Directory name = git commit hash
+  # Directory name = git commit hash (some bus (missing src) are fixed)
   - name: gcr.io/cloud-builders/gsutil
     entrypoint: bash
     args:
