@@ -1,49 +1,8 @@
-<!-- 
-Copyright 2022 Google LLC
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    https://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
- -->
- # Vertex Pipelines End-to-end Samples
+# Vertex Pipelines End-to-end Samples
 
 ## Introduction
 
 This repository provides a reference implementation of [Vertex Pipelines](https://cloud.google.com/vertex-ai/docs/pipelines/) for creating a production-ready MLOps solution on Google Cloud.
-
-### Why does this matter?
-
-It is hard to productionalize data science use cases, especially because the journey from experimentation is lacking standardisation. 
-Thus, this project aims at boosting, scalability, productivity and standardisation of data science use cases amongst data science teams.
-As a result, this will free up time for data scientists so that they can focus on data science with minimal engineering overhead.
-
-This project bundles reusable code and provides the creation of a MLOps platform via an template-driven approach allowing to:
-
-- **Create a new use case from a template.** Create a new ML training pipeline and batch prediction pipeline based on a template. 
-- **Execute a one-off pipeline run in a sandbox environment.** Try out a pipeline during the development cycle in a sandbox (development) environment.
-- **Deploy a pipeline to a production environment.** Deploy a new or updated pipeline to a production environment allowing for orchestration, schedules and triggers.
-- **Publish a new template.** Customize or extend the existing templates to create a new pipeline template that can be used by the data scientists on the team to support new use cases.
-
-As such, this project includes the infrastructure on Google Cloud, a CI/CD integration and existing templates to support training and prediction pipelines for common ML frameworks such as TensorFlow and XGBoost.
-To showcase the pipelines in action, the [Public Chicago Taxi Trips Dataset](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=chicago_taxi_trips&page=dataset) is used to predict the total fare of a taxi trip in Chicago.
-
-### Cloud Architecture
-
-Vertex AI Pipelines is a serverless orchestrator for running ML pipelines, using either the KFP SDK or TFX. However, unlike Kubeflow Pipelines, it does not have a built-in mechanism for saving Pipelines so that they can be run later, either on a schedule or via an external trigger. Instead, every time you want to run an ML pipeline in Vertex AI, you must make the API call to Vertex AI Pipelines, including the full pipeline definition, and Vertex Pipelines will run the pipeline there and then.
-
-In a production MLOps solution, your ML pipelines need to be repeatable. So, we have created a Cloud Function to trigger the execution of ML pipelines on Vertex AI. This can be done either using a schedule (via Cloud Scheduler), or from an external system using Pub/Sub. We use Cloud Build to compile the pipelines using the KFP SDK, and publish them to a GCS bucket. The Cloud Function retrieves the pipeline definition from the bucket, and triggers an execution of the pipeline in Vertex AI.
-
-![Using a Cloud Function to trigger Vertex Pipelines](docs/images/cf_view.png)
-
-## Getting started
 
 ### Prerequisites
 
@@ -57,7 +16,7 @@ In a production MLOps solution, your ML pipelines need to be repeatable. So, we 
 1. Install Python: `pyenv install`
 1. Install pipenv and pipenv dependencies: `make setup`
 1. Install pre-commit hooks: `cd pipelines && pipenv run pre-commit install`
-1. Copy `env.sh.example` to `env.sh`, and update the environment variables in `env.sh`
+1. Update the environment variables in `env.sh`
 1. Load the environment variables in `env.sh` by running `source env.sh`
 
 ### Deploying Cloud Infrastructure
@@ -220,10 +179,6 @@ Update `PIPELINE_TEMPLATE` to `xgboost` or `tensorflow` in [env.sh](env.sh.examp
 Make changes to the ML pipelines and their associated tests.
 Refer to the [contribution instructions](CONTRIBUTING.md) for more information on committing changes. 
 
-### Add new pipelines
-
-See [USAGE](USAGE.md) for guidelines on how to add new pipelines (e.g. other than XGBoost and TensorFlow).
-
 ### Scheduling pipelines
 
 Terraform is used to deploy Cloud Scheduler jobs that trigger the Vertex Pipeline runs. This is done by the CI/CD pipelines (see section below on CI/CD).
@@ -256,6 +211,3 @@ Below is a diagram of how the files are published in each environment in the `e2
 4. `terraform-plan.yaml` - Checks the Terraform configuration under `terraform/envs/<env>` (e.g. `terraform/envs/test`), and produces a summary of any proposed changes that will be applied on merge to the main branch.
 5. `terraform-apply.yaml` - Applies the Terraform configuration under `terraform/envs/<env>` (e.g. `terraform/envs/test`).
 
-For more details on setting up CI/CD, see the [separate README](cloudbuild/README.md).
-
-For a full walkthrough of the journey from changing the ML pipeline code to having it scheduled and running in production, please see the guide [here](docs/PRODUCTION.md).
